@@ -1,15 +1,18 @@
-document.getElementById('loaded').innerHTML = (new Date()).toLocatetimeString();
-document.getElementById('btn-getdata').addEventListener('click', makerequest);
+document.getElementById('page-loaded').innerHTML = (new Date()).toLocaleTimeString();
 
-function makerequest() {
+document.getElementById('get-data').addEventListener('click', getdata);
+
+function getdata() {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
-        if (xhr.readystate === 4 && xhr.status === 2000) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             var clientdata = JSON.parse(xhr.responseText);
             document.getElementById('client-name').innerHTML = clientdata.name;
             document.getElementById('client-adress').innerHTML = clientdata.adress;
+            document.getElementById('client-work').innerHTML = clientdata.work;
         }
     }
     xhr.open('GET', 'client.json', true);
     xhr.send();
+    
 }
